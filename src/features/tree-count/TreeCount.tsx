@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
-import { getPlantData, apiGetPlantData, selectData } from "./treeSlice";
+import moment from "moment";
+import {
+  getPlantData,
+  apiGetPlantData,
+  selectData,
+  PlantData,
+  selectLoading,
+} from "./treeSlice";
 
 export const TreeCount = () => {
   const dispatch = useDispatch();
+  const loading = useSelector(selectLoading);
   let data = useSelector(selectData);
   useEffect(() => {
     dispatch(getPlantData());
@@ -14,6 +22,10 @@ export const TreeCount = () => {
   const [showXLabel, setShowXLabel] = useState(true);
 
   data = data.slice(0, dayCount);
+  data = data.map((v: PlantData) => ({
+    value: v.value,
+    createdAt: moment(v.createdAt).format("DD/MM/YY"),
+  }));
 
   const updateCount = (value: number) => {
     if (value < 1 || value > 500) {
@@ -41,14 +53,14 @@ export const TreeCount = () => {
         />
         days?
       </p>
-      {!data.length && <p>Please wait...</p>}
+      {loading && <p>Please wait...</p>}
 
-      {data.length && (
+      {!loading && (
         <BarChart
           width={1200}
           height={600}
           data={data}
-          margin={{ top: 25, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 25, right: 30, left: 30, bottom: 15 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="createdAt" hide={!showXLabel} />{" "}

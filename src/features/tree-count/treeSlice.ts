@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk, RootState } from "../../app/store";
 
-interface PlantData {
+export interface PlantData {
   value: number;
   createdAt: string;
 }
@@ -32,6 +32,7 @@ export const treeSlice = createSlice({
       action: PayloadAction<Array<PlantData>>
     ) => {
       state.data = action.payload;
+      state.isLoading = false;
     },
   },
 });
@@ -50,5 +51,6 @@ export const apiGetPlantData = (): AppThunk => (dispatch) => {
 };
 
 export const selectData = (state: RootState) => state.tree.data;
+export const selectLoading = (state: RootState) => state.tree.isLoading;
 
 export default treeSlice.reducer;
