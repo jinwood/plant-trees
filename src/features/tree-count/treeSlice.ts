@@ -44,7 +44,6 @@ export const {
 } = treeSlice.actions;
 
 export const apiGetPlantData = (): AppThunk => (dispatch) => {
-  console.log("api");
   fetch("https://public.ecologi.com/trees")
     .then((response) => response.json())
     .then((data) => dispatch(getPlantDataSuccess(data)));
