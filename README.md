@@ -44,6 +44,8 @@ The CSS is very basic and I have not considered how the graph would look on mobi
 
 I would also consider moving the slicing / formatting logic out of the `TreeCount` component and into its own helper or into the reducer. As previously mentioned, the range of data being displayed could be modified by giving the api a date range so the component wouldn't need to modify the data itself.
 
+Finally, the code that hides the X axis label is quite rudimentary and doesn't provide a particularly great user experience. I would expand on the functionality and rather than hiding the fields, display a subset of months / years depending on the size of the range.
+
 ## Footnote
 
 Since submitting I have noticed that the dataset has multiple entries per day, hence why the graph renders more than one bar per day. This something that can be easily coded around by mapping over the data and grouping by recurring (simplified) date. It would also an excellent way to improve the API and reduce the size of the dataset.
