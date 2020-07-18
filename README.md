@@ -43,3 +43,7 @@ The layout / structure is a little odd, and only one component in depth. If this
 The CSS is very basic and I have not considered how the graph would look on mobile. Improvements would be to use either css modules or styled components and add some structure to how the css is written.
 
 I would also consider moving the slicing / formatting logic out of the `TreeCount` component and into its own helper or into the reducer. As previously mentioned, the range of data being displayed could be modified by giving the api a date range so the component wouldn't need to modify the data itself.
+
+## Footnote
+
+Since submitting I have noticed that the dataset has multiple entries per day, hence why the graph renders more than one bar per day. This something that can be easily coded around by mapping over the data and grouping by recurring (simplified) date. It would also an excellent way to improve the API and reduce the size of the dataset.

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 import moment from "moment";
+import groupBy from "lodash/groupBy";
 import {
   getPlantData,
   apiGetPlantData,
@@ -23,6 +24,8 @@ export const TreeCount = () => {
 
   let total = 0;
   data = data.slice(0, dayCount);
+  const groupedData = groupBy(data, "createdAt");
+  console.log(groupedData);
   data = data.map((v: PlantData) => {
     total += v.value;
     return {
