@@ -11,9 +11,21 @@ export const TreeCount = () => {
     dispatch(apiGetPlantData());
   }, [dispatch]);
   const [dayCount, setDayCount] = useState(5);
+  const [showXLabel, setShowXLabel] = useState(true);
+
   data = data.slice(0, dayCount);
 
   const updateCount = (value: number) => {
+    if (value < 1 || value > 500) {
+      return;
+    }
+    if (value > 6) {
+      setShowXLabel(false);
+    }
+    if (value <= 6) {
+      setShowXLabel(true);
+    }
+
     setDayCount(value);
   };
 
@@ -39,8 +51,7 @@ export const TreeCount = () => {
           margin={{ top: 25, right: 30, left: 20, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-
-          <XAxis dataKey="createdAt" />
+          <XAxis dataKey="createdAt" hide={!showXLabel} />{" "}
           <YAxis type="number" />
           <Tooltip />
           <Bar dataKey="value" fill="#0c9e77" />
