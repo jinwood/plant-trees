@@ -1,3 +1,6 @@
+body {
+  background-color: #c8e0e8;
+}
 .App {
   text-align: center;
 }
@@ -9,7 +12,6 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
   }
 }
 
@@ -22,6 +24,12 @@
   font-size: calc(10px + 2vmin);
 }
 
+.App-header input {
+  font-size: calc(10px + 2vmin);
+  width: 75px;
+  background-color: #dbf6ff;
+}
+
 .App-link {
   color: rgb(112, 76, 182);
 }
@@ -31,9 +39,9 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(10px)
+    transform: translateY(10px);
   }
   100% {
-    transform: translateY(0px)
+    transform: translateY(0px);
   }
 }

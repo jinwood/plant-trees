@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./logo.svg";
+import logo from "./logo.png";
 import { TreeCount } from "./features/tree-count/TreeCount";
 import "./App.css";
 
