@@ -1,10 +1,4 @@
-import {
-  treeSlice,
-  apiGetPlantData,
-  selectData,
-  initialState,
-  TreeState,
-} from "./treeSlice";
+import { treeSlice, selectData, initialState, TreeState } from "./treeSlice";
 import { AnyAction } from "@reduxjs/toolkit";
 
 describe("treeSlice", () => {
