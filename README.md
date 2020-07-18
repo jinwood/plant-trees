@@ -16,7 +16,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Launches the test runner in the interactive watch mode.<br />
 
----
+## Summary
 
 Overall I'm happy with how the project turned out, there are a few things I would change if I did it again which I'll go over in this part of the readme.
 
