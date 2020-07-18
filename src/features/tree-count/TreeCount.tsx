@@ -21,11 +21,15 @@ export const TreeCount = () => {
   const [dayCount, setDayCount] = useState(5);
   const [showXLabel, setShowXLabel] = useState(true);
 
+  let total = 0;
   data = data.slice(0, dayCount);
-  data = data.map((v: PlantData) => ({
-    value: v.value,
-    createdAt: moment(v.createdAt).format("DD/MM/YY"),
-  }));
+  data = data.map((v: PlantData) => {
+    total += v.value;
+    return {
+      value: v.value,
+      createdAt: moment(v.createdAt).format("DD/MM/YY"),
+    };
+  });
 
   const updateCount = (value: number) => {
     if (value < 1 || value > 500) {
@@ -41,6 +45,7 @@ export const TreeCount = () => {
     setDayCount(value);
   };
 
+  const totalText = `That's ${total} ${total === 1 ? "tree" : "trees"}!`;
   return (
     <div>
       <p>
@@ -69,6 +74,7 @@ export const TreeCount = () => {
           <Bar dataKey="value" fill="#0c9e77" />
         </BarChart>
       )}
+      {total > 0 && <p>{totalText}</p>}
     </div>
   );
 };
