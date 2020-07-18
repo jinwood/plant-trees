@@ -1,4 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+## Hi, and welcome to my ecologi tech test submission
+
+This project has been bootsrapped using create-react-app. You can use the following commands to run the app locally.
+I have not tested `build` or `eject` but see no reason why they wouldn't work.
 
 ## Available Scripts
 
@@ -9,36 +12,34 @@ In the project directory, you can run:
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
 ### `yarn test`
 
 Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+---
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Overall I'm happy with how the project turned out, there are a few things I would change if I did it again which I'll go over in this part of the readme.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Firstly, The dataset is extremely large and causes some performance warnings in the browser console. Ideally, this would be corrected at the api, by offering some date parameters so that the UI can request a slice of the data rather than the entire collection. Or by offering a condensed alternative (trees planted per month perhaps?).
+I'm not sure if there is a way to avoid this causing issues / errors in the ui, but given more time I would have researched the causes and prevented them.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+In the UI itself, the dataset size makes rendering a useful chart challenging, as plotting the date range over X axis, for example, renders an extremely wide chart. Hence why I chose to restrict the size of the dataset by default and give the user the option to expand it at their will.
 
-### `yarn eject`
+I used redux-toolkit's slice feature for creating the state management, which I feel provides the perfect amount of flexibility without requiring a lot of boilerplate code.
+I wrote unit tests to cover the basics, different possible states, selector output.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Given some more time...
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The `treeSlice` reducer uses `Thunk` to abstract the api call. In a production app with more external dependencies I would separate this into its own module and perhaps use `redux-saga` to add some flexibility (pausing, cancelling etc).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+There are no UI / component tests (excluding the test that comes bundled with this template). I would have written tests such as:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Does `TreeCount` render a graph given a state containing data
+- Does `TreeCount` graph hide its X axis given a `dayCount` of 10
+- Does `TreeCount` render the loading text given the loading state
 
-## Learn More
+There is no error handling in the UI, but there is error state in redux so it would be simple to add in.
+The layout / structure is a little odd, and only one component in depth. If this is was a production application it would make sense to add some layering and a reusable layout.
+The CSS is very basic and I have not considered how the graph would look on mobile. Improvements would be to use either css modules or styled components and add some structure to how the css is written.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+I would also consider moving the slicing / formatting logic out of the `TreeCount` component and into its own helper or into the reducer. As previously mentioned, the range of data being displayed could be modified by giving the api a date range so the component wouldn't need to modify the data itself.
