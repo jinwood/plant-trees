@@ -1,5 +1,3 @@
-## Hi, and welcome to my ecologi tech test submission
-
 This project has been bootsrapped using create-react-app. You can use the following commands to run the app locally.
 I have not tested `build` or `eject` but see no reason why they wouldn't work.
 
